@@ -78,19 +78,19 @@ Questo modulo gestisce la parte hardware.
 
 Il sistema segue questo flusso:
 
-Spotify API
-    ↓
-Python (main.py)
-    ↓
-LRCLIB API
-    ↓
-Parsing + sincronizzazione timestamp
-    ↓
-Seriale USB (PySerial)
-    ↓
-Arduino
-    ↓
-LCD 16x2
+Spotify API  
+    ↓  
+Python (main.py)  
+    ↓  
+LRCLIB API  
+    ↓  
+Parsing + sincronizzazione timestamp  
+    ↓  
+Seriale USB (PySerial)  
+    ↓  
+Arduino  
+    ↓  
+LCD 16x2  
 
 
 ---
