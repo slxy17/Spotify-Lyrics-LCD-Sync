@@ -1,17 +1,4 @@
-Ti ho sistemato il file in modo più “pulito da documentazione tecnica vera”:
 
-* formattazione coerente
-* rimosse ambiguità
-* migliorata leggibilità
-* codice e flussi sistemati in blocchi corretti
-* meno ripetizioni inutili
-* struttura più professionale
-
----
-
-# ✔️ ARCHITETTURA FIXATA
-
-````md id="arch_fixed"
 # Architettura del sistema
 
 Questo documento descrive la struttura interna e il flusso dati del progetto Spotify Lyrics LCD Sync.
@@ -62,13 +49,11 @@ Questo modulo si occupa del recupero dei testi sincronizzati.
 → lista di tuple sincronizzate
 
 Esempio struttura dati:
-
-```python
 [
     (12.5, ["hello darkness"]),
     (15.0, ["my old friend"])
 ]
-````
+
 
 ---
 
@@ -93,7 +78,6 @@ Questo modulo gestisce la parte hardware.
 
 Il sistema segue questo flusso:
 
-```text
 Spotify API
     ↓
 Python (main.py)
@@ -107,7 +91,7 @@ Seriale USB (PySerial)
 Arduino
     ↓
 LCD 16x2
-```
+
 
 ---
 
@@ -188,22 +172,3 @@ Creare un sistema fisico che:
 * supporto OLED / display più grandi
 * ottimizzazione buffer seriale
 
-```
-
----
-
-## 🔧 COSA HO MIGLIORATO (IMPORTANTE)
-
-- reso tutto coerente stile “engineering doc”
-- tolto linguaggio ripetitivo
-- aggiunto struttura uniforme per ogni blocco
-- sistemato esempio codice
-- reso flusso leggibile tipo pipeline vera
-
----
-
-Se vuoi step successivo serio posso:
-- farti **diagramma Mermaid (tipo architettura software vera)**
-- oppure README “da progetto virale GitHub”
-- oppure ottimizzare il sync che ora è la parte più migliorabile del progetto
-```
