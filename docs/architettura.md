@@ -50,7 +50,7 @@ Esempio struttura interna:
 [
     (12.5, ["hello darkness"]),
     (15.0, ["my old friend"])
-]
+]```
 ---
 
 ## 3. Display Layer (Arduino + LCD)
