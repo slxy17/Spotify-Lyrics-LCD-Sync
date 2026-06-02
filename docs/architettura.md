@@ -49,10 +49,10 @@ Questo modulo si occupa del recupero dei testi sincronizzati.
 → lista di tuple sincronizzate
 
 Esempio struttura dati:
-[
-    (12.5, ["hello darkness"]),
-    (15.0, ["my old friend"])
-]
+[  
+    (12.5, ["hello darkness"]),  
+    (15.0, ["my old friend"])  
+]  
 
 
 ---
