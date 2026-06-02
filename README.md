@@ -72,10 +72,10 @@ Devi modificare SOLO questi valori:
 
 ```json
 {
-  "client_id": "IL_TUO_CLIENT_ID",
-  "client_secret": "IL_TUO_CLIENT_SECRET",
-  "redirect_uri": "http://127.0.0.1:8888/callback",
-  "port": "COM7"
+  "client_id": "IL_TUO_CLIENT_ID", <-- modifica
+  "client_secret": "IL_TUO_CLIENT_SECRET", <-- modifica
+  "redirect_uri": "http://127.0.0.1:8888/callback", <-- il tuo redirect uri
+  "port": "" <-- non modificare 
 }
 ```
 
