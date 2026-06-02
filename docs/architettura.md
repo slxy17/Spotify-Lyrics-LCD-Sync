@@ -46,9 +46,10 @@ Output:
 → lista di righe sincronizzate con timestamp
 
 Esempio struttura interna:
+```python
 [
-(12.5, ["hello darkness"]),
-(15.0, ["my old friend"])
+    (12.5, ["hello darkness"]),
+    (15.0, ["my old friend"])
 ]
 ---
 
@@ -67,22 +68,19 @@ Output:
 ---
 
 # Flusso dei dati
-
-Il flusso completo è:
 Spotify API
-↓
+    ↓
 Python (main.py)
-↓
+    ↓
 LRCLIB API
-↓
-Parsing + Sync
-↓
+    ↓
+Parsing + sincronizzazione timestamp
+    ↓
 Seriale USB (PySerial)
-↓
+    ↓
 Arduino
-↓
+    ↓
 LCD 16x2
----
 
 # Logica di sincronizzazione
 
