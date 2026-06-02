@@ -1,3 +1,17 @@
+Ti ho sistemato il file in modo più “pulito da documentazione tecnica vera”:
+
+* formattazione coerente
+* rimosse ambiguità
+* migliorata leggibilità
+* codice e flussi sistemati in blocchi corretti
+* meno ripetizioni inutili
+* struttura più professionale
+
+---
+
+# ✔️ ARCHITETTURA FIXATA
+
+````md id="arch_fixed"
 # Architettura del sistema
 
 Questo documento descrive la struttura interna e il flusso dati del progetto Spotify Lyrics LCD Sync.
@@ -8,66 +22,78 @@ Questo documento descrive la struttura interna e il flusso dati del progetto Spo
 
 Il sistema è composto da tre livelli principali:
 
-1. Spotify API (acquisizione dati brano)
-2. Motore Lyrics (recupero e sincronizzazione testi)
-3. Output hardware (Arduino + LCD)
+1. Acquisizione dati Spotify
+2. Recupero e sincronizzazione lyrics
+3. Output su hardware (Arduino + LCD)
 
 ---
 
 # Componenti principali
 
-## 1. Spotify Layer (Python - Spotipy)
+## 1. Spotify Layer (Spotipy)
 
-Questo modulo si occupa di:
+Questo modulo gestisce la comunicazione con le API Spotify.
 
-- autenticazione con Spotify
-- lettura del brano attualmente in riproduzione
-- acquisizione di:
+### Funzioni principali:
+- autenticazione utente
+- rilevamento brano in riproduzione
+- acquisizione dati del brano:
   - titolo
   - artista
   - durata
-  - progressione del brano
+  - progressione (timestamp corrente)
 
-Output:
+### Output:
 → dati del brano in tempo reale
 
 ---
 
 ## 2. Lyrics Engine (LRCLIB)
 
-Questo modulo:
+Questo modulo si occupa del recupero dei testi sincronizzati.
 
-- invia richiesta HTTP a LRCLIB
-- cerca i testi del brano
-- seleziona la versione con timestamp
-- filtra in base alla durata del brano
+### Funzioni principali:
+- richiesta HTTP a LRCLIB
+- ricerca del brano tramite titolo e artista
+- selezione versione con timestamp
+- filtro basato sulla durata del brano
 
-Output:
-→ lista di righe sincronizzate con timestamp
+### Output:
+→ lista di tuple sincronizzate
 
-Esempio struttura interna:
+Esempio struttura dati:
+
 ```python
 [
     (12.5, ["hello darkness"]),
     (15.0, ["my old friend"])
-]python```
+]
+````
+
 ---
 
 ## 3. Display Layer (Arduino + LCD)
 
-Questo modulo:
+Questo modulo gestisce la parte hardware.
 
-- riceve dati dalla seriale USB
-- interpreta il formato `riga1|riga2`
-- aggiorna il display LCD 16x2
-- gestisce caratteri non supportati
+### Funzioni principali:
 
-Output:
-→ visualizzazione fisica su LCD
+* ricezione dati via seriale USB
+* parsing formato `riga1|riga2`
+* aggiornamento LCD 16x2
+* gestione caratteri non supportati
+
+### Output:
+
+→ visualizzazione fisica del testo sul display
 
 ---
 
 # Flusso dei dati
+
+Il sistema segue questo flusso:
+
+```text
 Spotify API
     ↓
 Python (main.py)
@@ -81,16 +107,20 @@ Seriale USB (PySerial)
 Arduino
     ↓
 LCD 16x2
+```
+
+---
 
 # Logica di sincronizzazione
 
-Il sistema utilizza il tempo di riproduzione del brano:
+La sincronizzazione si basa sul tempo di riproduzione del brano:
 
-- `progress_ms` (Spotify)
-- confronto con timestamp delle lyrics
-- aggiornamento quando viene raggiunto il tempo corretto
+* `progress_ms` fornito da Spotify
+* confronto con timestamp delle lyrics
+* aggiornamento quando il tempo corrente supera il timestamp della riga
 
-Questo permette una sincronizzazione quasi reale.
+Risultato:
+→ sincronizzazione quasi real-time tra audio e testo
 
 ---
 
@@ -98,32 +128,35 @@ Questo permette una sincronizzazione quasi reale.
 
 ## main.py
 
-Contiene tutta la logica principale:
+File principale del progetto.
 
-- connessione Spotify
-- gestione loop principale
-- richiesta lyrics
-- sincronizzazione
-- invio dati ad Arduino
+### Responsabilità:
+
+* gestione Spotify API
+* loop principale del programma
+* recupero lyrics
+* sincronizzazione tempo-testo
+* invio dati ad Arduino
 
 ---
 
 ## Librerie utilizzate
 
-- spotipy → Spotify API
-- requests → HTTP LRCLIB
-- pyserial → comunicazione Arduino
-- json → configurazione
+* spotipy → API Spotify
+* requests → chiamate HTTP (LRCLIB)
+* pyserial → comunicazione seriale con Arduino
+* json → gestione configurazione
 
 ---
 
 # Design del sistema
 
-Il progetto è progettato con un approccio:
+Il progetto è basato su:
 
-- modulare
-- event-driven (basato sul brano in riproduzione)
-- realtime (aggiornamento continuo)
+* architettura modulare
+* approccio event-driven (cambio brano)
+* esecuzione realtime
+* pipeline dati lineare
 
 ---
 
@@ -131,25 +164,46 @@ Il progetto è progettato con un approccio:
 
 Creare un sistema fisico che:
 
-- visualizza i testi Spotify in tempo reale
-- sincronizza audio e testo
-- usa hardware economico (Arduino + LCD)
+* mostra lyrics Spotify in tempo reale
+* sincronizza audio e testo
+* utilizza hardware economico (Arduino + LCD 16x2)
 
 ---
 
-# Limiti architetturali
+# Limitazioni
 
-- dipendenza da LRCLIB per i testi
-- latenza variabile API Spotify
-- precisione non perfetta al millisecondo
-- LCD limitato a 16 caratteri per riga
+* non tutti i brani hanno lyrics sincronizzate
+* dipendenza da LRCLIB
+* latenza variabile delle API Spotify
+* precisione non perfetta al millisecondo
+* limite fisico LCD (16 caratteri per riga)
 
 ---
 
-# Possibili miglioramenti futuri
+# Possibili miglioramenti
 
-- caching locale dei testi
-- fallback API lyrics alternative
-- miglior algoritmo di sync
-- supporto OLED display
-- buffering seriale ottimizzato
+* caching locale delle lyrics
+* fallback a più API lyrics
+* algoritmo di sincronizzazione più preciso
+* supporto OLED / display più grandi
+* ottimizzazione buffer seriale
+
+```
+
+---
+
+## 🔧 COSA HO MIGLIORATO (IMPORTANTE)
+
+- reso tutto coerente stile “engineering doc”
+- tolto linguaggio ripetitivo
+- aggiunto struttura uniforme per ogni blocco
+- sistemato esempio codice
+- reso flusso leggibile tipo pipeline vera
+
+---
+
+Se vuoi step successivo serio posso:
+- farti **diagramma Mermaid (tipo architettura software vera)**
+- oppure README “da progetto virale GitHub”
+- oppure ottimizzare il sync che ora è la parte più migliorabile del progetto
+```
