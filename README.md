@@ -126,8 +126,7 @@ linea1|linea2
 Esempio:
 
 ```
-hello darkness|my old friend
-```
+vorrei fotografarti|con le palpebre```
 
 ---
 
