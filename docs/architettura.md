@@ -90,6 +90,7 @@ Seriale USB (PySerial)
     ↓
 Arduino
     ↓
+LCD 16x2
 ```
 LCD 16x2
 ---
