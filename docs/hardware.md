@@ -23,6 +23,9 @@
 
 ## Collegamenti LCD → Arduino
 
+<img width="715" height="695" alt="Screenshot 2026-06-02 130538" src="https://github.com/user-attachments/assets/a260541a-03eb-4db4-8857-6292a360d405" />
+
+
 | LCD | Arduino |
 |-----|--------|
 | RS  | 12 |
