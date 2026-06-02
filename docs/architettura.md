@@ -79,17 +79,17 @@ Questo modulo gestisce la parte hardware.
 Il sistema segue questo flusso:
 
 Spotify API  
-&emsp↓  
+&emsp ↓  
 Python (main.py)  
-&emsp↓  
+&emsp ↓  
 LRCLIB API  
-&emsp↓  
+&emsp ↓  
 Parsing + sincronizzazione timestamp  
-&emsp↓  
+&emsp ↓  
 Seriale USB (PySerial)  
-&emsp↓  
+&emsp ↓  
 Arduino  
-&emsp↓  
+&emsp ↓  
 LCD 16x2  
 
 
