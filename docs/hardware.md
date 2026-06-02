@@ -39,4 +39,19 @@
 - Baud rate: 115200
 - USB diretta da PC
 
-Formato:
+Formato:  
+riga1|riga2
+
+---
+
+## Schema logico
+
+PC → USB → Arduino → LCD
+
+---
+
+## Note importanti
+
+- Il contrasto LCD va regolato con potenziometro
+- Alimentazione 5V stabile consigliata
+- Se il display è vuoto → controllare wiring
