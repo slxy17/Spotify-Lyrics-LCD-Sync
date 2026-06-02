@@ -92,7 +92,7 @@ Arduino
     ↓
 LCD 16x2
 ```
-LCD 16x2
+
 ---
 
 # Logica di sincronizzazione
