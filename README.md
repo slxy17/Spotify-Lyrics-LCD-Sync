@@ -1,22 +1,24 @@
+
+````md
 # Spotify Lyrics LCD Sync
 
 Sistema per la visualizzazione in tempo reale dei testi sincronizzati di Spotify su un display LCD 16x2 collegato ad Arduino tramite comunicazione seriale.
 
-Il software rileva automaticamente il brano in riproduzione su Spotify, scarica i testi sincronizzati tramite LRCLIB e li visualizza sia nel terminale che sul display LCD.
+Il software rileva automaticamente il brano in riproduzione su Spotify, scarica i testi sincronizzati tramite LRCLIB e li mostra sia nel terminale che sul display LCD.
 
 ---
 
 # Caratteristiche
 
-* Rilevamento automatico del brano in riproduzione
-* Download automatico dei testi sincronizzati
-* Cambio automatico del brano
-* Supporto display LCD 16x2
-* Comunicazione seriale con Arduino
-* Interfaccia terminale in tempo reale
-* Gestione automatica delle righe lunghe
-* Compatibilità con Spotify Desktop
-* Sincronizzazione dei testi basata sui timestamp
+- Rilevamento automatico del brano in riproduzione
+- Download dei testi sincronizzati
+- Cambio automatico del brano
+- Supporto display LCD 16x2
+- Comunicazione seriale con Arduino
+- Interfaccia terminale in tempo reale
+- Gestione automatica delle righe da 16 caratteri
+- Compatibilità con Spotify Desktop
+- Sincronizzazione basata su timestamp
 
 ---
 
@@ -24,32 +26,32 @@ Il software rileva automaticamente il brano in riproduzione su Spotify, scarica 
 
 ## Computer
 
-* Windows, Linux o macOS
-* Connessione Internet
-* Porta USB disponibile
+- Windows, Linux o macOS
+- Connessione Internet
+- Porta USB disponibile
 
 ## Microcontrollore
 
 Compatibile con:
 
-* Arduino Uno
-* Arduino Nano
-* Arduino Mega
-* ESP32
-* Schede compatibili Arduino
+- Arduino Uno
+- Arduino Nano
+- Arduino Mega
+- ESP32
+- Schede compatibili Arduino
 
 ## Display
 
-* LCD 16x2 compatibile HD44780
+- LCD 16x2 (HD44780)
 
 ---
 
 # Requisiti Software
 
-* Python 3.10 o superiore
-* Spotify Desktop installato
-* Account Spotify Premium
-* Arduino IDE (per il caricamento del firmware)
+- Python 3.10 o superiore
+- Spotify Desktop installato
+- Account Spotify Premium
+- Arduino IDE (per caricare il firmware)
 
 ---
 
@@ -60,9 +62,9 @@ Compatibile con:
 ```bash
 git clone https://github.com/slxy17/Spotify-Lyrics-LCD-Sync.git
 cd Spotify-Lyrics-LCD-Sync
-```
+````
 
-## Installazione delle dipendenze
+## Installazione dipendenze
 
 ```bash
 pip install -r requirements.txt
@@ -72,16 +74,16 @@ pip install -r requirements.txt
 
 # Configurazione Spotify
 
-Accedere al portale Spotify for Developers:
+Accedere al portale:
 
-https://developer.spotify.com/dashboard
+[https://developer.spotify.com/dashboard](https://developer.spotify.com/dashboard)
 
 Creare una nuova applicazione e ottenere:
 
 * Client ID
 * Client Secret
 
-Aggiungere il seguente Redirect URI:
+Aggiungere il Redirect URI:
 
 ```text
 http://127.0.0.1:8888/callback
@@ -89,15 +91,15 @@ http://127.0.0.1:8888/callback
 
 ---
 
-# Configurazione del file config.json
+# Configurazione `config.json`
 
-Nella cartella principale del progetto è presente il file:
+Nel progetto è presente il file:
 
 ```text
 config.json
 ```
 
-con il seguente contenuto:
+Contenuto:
 
 ```json
 {
@@ -107,88 +109,45 @@ con il seguente contenuto:
 }
 ```
 
-Prima di eseguire il programma è necessario sostituire:
+Prima di eseguire il programma:
 
-* `IL_TUO_CLIENT_ID` con il Client ID della propria applicazione Spotify;
-* `IL_TUO_CLIENT_SECRET` con il Client Secret della propria applicazione Spotify.
+* sostituire `IL_TUO_CLIENT_ID`
+* sostituire `IL_TUO_CLIENT_SECRET`
 
-Il valore di `redirect_uri` deve coincidere con quello configurato nella Dashboard Spotify.
-
----
-
-# Configurazione della porta seriale
-
-Nel file `main.py` è presente la seguente configurazione:
-
-```python
-LCD_PORT = "COM7"
-LCD_BAUD = 115200
-```
-
-Modificare il valore di `LCD_PORT` inserendo la porta COM utilizzata dal proprio Arduino.
-
-Esempi:
-
-```python
-LCD_PORT = "COM3"
-```
-
-```python
-LCD_PORT = "COM5"
-```
-
-```python
-LCD_PORT = "COM12"
-```
-
-Per verificare la porta assegnata ad Arduino:
-
-### Windows
-
-1. Aprire Gestione Dispositivi.
-2. Espandere la sezione "Porte (COM e LPT)".
-3. Individuare la porta associata ad Arduino.
-
-### Linux
-
-```bash
-ls /dev/tty*
-```
-
-### macOS
-
-```bash
-ls /dev/cu.*
-```
-
-La velocità seriale deve rimanere impostata a:
-
-```python
-LCD_BAUD = 115200
-```
-
-e deve corrispondere a quella utilizzata nel firmware Arduino.
+Il `redirect_uri` deve coincidere con quello configurato su Spotify Developer Dashboard.
 
 ---
 
-# Caricamento del firmware Arduino
+# Configurazione porta seriale
+
+Il programma seleziona automaticamente la porta seriale Arduino all’avvio.
+
+Se necessario, è possibile modificarla nel file `config.json` oppure tramite il menu di selezione integrato.
+
+La velocità seriale deve rimanere:
+
+```python
+115200
+```
+
+---
+
+# Caricamento firmware Arduino
 
 Aprire il file `.ino` con Arduino IDE e caricarlo sulla scheda.
 
-Il firmware ha il compito di:
+Il firmware:
 
-* ricevere i dati inviati dal software Python;
-* interpretare il protocollo seriale;
-* aggiornare il display LCD;
-* sostituire automaticamente i caratteri accentati non supportati dal controller HD44780.
+* riceve i dati via seriale
+* interpreta il protocollo `riga1|riga2`
+* aggiorna il display LCD
+* sostituisce automaticamente i caratteri accentati non supportati
 
-All'avvio il display mostrerà:
+All’avvio il display mostra:
 
 ```text
 In attesa testo...
 ```
-
-finché non verrà ricevuto il primo messaggio dal programma Python.
 
 ---
 
@@ -198,30 +157,28 @@ finché non verrà ricevuto il primo messaggio dal programma Python.
 python main.py
 ```
 
-Al primo avvio verrà aperto automaticamente il browser per autorizzare l'accesso all'account Spotify.
+Al primo avvio:
 
-Una volta completata l'autenticazione, il programma inizierà a monitorare il brano in riproduzione.
+* si aprirà il browser per l’autenticazione Spotify
+* verrà selezionata la porta seriale Arduino
 
 ---
 
 # Funzionamento
 
-Il software esegue il seguente flusso operativo:
-
-1. Connessione alle API Spotify.
-2. Rilevamento del brano in riproduzione.
-3. Download dei testi sincronizzati tramite LRCLIB.
-4. Elaborazione dei timestamp.
-5. Suddivisione automatica del testo in righe da 16 caratteri.
-6. Invio delle informazioni ad Arduino tramite seriale.
-7. Aggiornamento del display LCD.
-8. Aggiornamento automatico in caso di cambio brano.
+1. Connessione alle API Spotify
+2. Lettura brano in riproduzione
+3. Download testi sincronizzati da LRCLIB
+4. Parsing timestamp
+5. Suddivisione testo per LCD (16 caratteri)
+6. Invio dati ad Arduino
+7. Aggiornamento display LCD
 
 ---
 
-# Protocollo di comunicazione seriale
+# Protocollo seriale
 
-Il software invia i dati nel seguente formato:
+Formato inviato:
 
 ```text
 riga1|riga2
@@ -233,43 +190,43 @@ Esempio:
 Hello darkness|my old friend
 ```
 
-Dove:
-
-* il testo prima del carattere `|` viene visualizzato sulla prima riga del display;
-* il testo dopo il carattere `|` viene visualizzato sulla seconda riga del display.
+* prima parte → riga 1 LCD
+* seconda parte → riga 2 LCD
 
 ---
 
-# Gestione dei testi
+# Gestione testo
 
-Poiché il display LCD dispone di 16 caratteri per riga, il software:
+Il software:
 
-* divide automaticamente le frasi lunghe;
-* evita di spezzare le parole quando possibile;
-* distribuisce il testo su più schermate se necessario;
-* sincronizza la visualizzazione con il tempo di riproduzione del brano.
+* divide automaticamente le righe lunghe
+* evita di spezzare parole quando possibile
+* sincronizza il testo con il tempo del brano
+* adatta tutto al limite di 16 caratteri
 
 ---
 
 # Dipendenze
 
-Il progetto utilizza le seguenti librerie Python:
+* spotipy
+* requests
+* pyserial
 
-* Spotipy
-* Requests
-* PySerial
+Installabili con:
 
-Le dipendenze sono installabili tramite il file `requirements.txt`.
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
 # Limitazioni
 
-* Non tutti i brani dispongono di testi sincronizzati su LRCLIB.
-* La precisione della sincronizzazione dipende dai dati forniti da LRCLIB.
-* Alcuni caratteri speciali potrebbero non essere supportati dal display LCD.
-* È richiesta una connessione Internet attiva.
-* È consigliato utilizzare Spotify Premium per ottenere una sincronizzazione più affidabile.
+* non tutti i brani hanno lyrics sincronizzate
+* dipendenza da LRCLIB
+* LCD limitato a 16 caratteri
+* richiede connessione Internet
+* consigliato Spotify Premium
 
 ---
 
@@ -277,6 +234,21 @@ Le dipendenze sono installabili tramite il file `requirements.txt`.
 
 Questo progetto è distribuito sotto licenza MIT.
 
-La licenza MIT consente di utilizzare, modificare, distribuire e pubblicare il software anche per scopi commerciali, purché venga mantenuto il testo della licenza originale e il relativo copyright.
+La licenza MIT consente l’uso, modifica e distribuzione del software anche per scopi commerciali, purché venga mantenuto il copyright originale.
 
-Per maggiori informazioni consultare il file `LICENSE` presente nel repository.
+Per maggiori dettagli consultare il file `LICENSE`.
+
+```
+
+---
+
+## 🔥 Se vuoi prossimo upgrade serio posso farti:
+
+- README con badge GitHub (Python, MIT, status build)
+- screenshot section + GIF animata
+- diagramma architettura
+- versione “pro repo” stile 1k+ stars
+- oppure ottimizzazione codice (ora è ancora migliorabile parecchio in sync e performance)
+
+Dimmi.
+```
